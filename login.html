@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>类淘宝登录框demo</title>
+  <link rel="stylesheet" href="./css/login.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html,body{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .bg-layout{
+      position: absolute;
+      left: 0;right: 0;bottom: -999px;top: -999px;
+      min-width: 100%;
+      min-height: 100%;
+      margin: auto;
+    }
+    .center{
+      position: fixed;
+      top: 0;right: 0;bottom: 0;left: 0;
+      width: 350px;
+      height: 300px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+    <img src="./images/bg.jpg" alt="" class="bg-layout" >
+    <div class="center">
+    <div class="login-wrapper">
+      <b class="cover-a"></b>
+      <b class="cover-b"></b>
+      <b id="changeLoginMethod" class="cover-method"></b>
+      <div class="login-method is-qrcode">
+        <span id="loginMethodQrcode" class="qrcode iconfont icon-qrcode"></span>
+        <span id="loginMethodPc" class="pc iconfont icon-iconpc"></span>
+      </div>
+
+      <div id="loginContentPc" class="pc-content" style="display: block;">
+        <h3>账户登录</h3>
+        <div class="input-line">
+          <label for="" class="input-line--label iconfont icon-user" title="用户名"></label>
+          <input class="input-line--input" placeholder="MobilePhone/UserName/Email" type="text">
+        </div>
+        <div class="input-line">
+          <label for="" class="input-line--label iconfont icon-lock" title="密码"></label>
+          <input class="input-line--input" type="password">
+        </div>
+        <p class="other-handle">
+          <a href="" class="forget-password">忘记登录密码</a>
+          <a href="" class="quick-register">免费注册</a>
+        </p>
+        <div class="input-hanlde-line">
+          <button>登录</button>
+        </div>
+      </div>
+      <div id="loginContentQrcode" class="qrcode-content" style="display: none;">
+        <h3>手机扫描，安全登录</h3>
+        <div class="login-qrcode-show">
+          <img src="./images/qrcode.png" alt="">
+        </div>
+
+        <div class="qrcode-bottom-info">
+          <i class="iconfont icon-icscan24px"></i>
+          打开<a href="">ezbuy APP</a>
+          <br>
+          扫一扫登录
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+    <script>
+      (function(){
+
+        var methodQR = document.getElementById('loginMethodQrcode');
+        var methodPC = document.getElementById('loginMethodPc');
+        var method = methodQR.parentNode;
+        var loginContentPc = document.getElementById('loginContentPc');
+        var loginContentQrcode = document.getElementById('loginContentQrcode');
+
+        var changeLoginMethod = document.getElementById('changeLoginMethod');
+
+        var showQrcode = function(){
+          method.className = "login-method is-pc";
+          loginContentPc.style.display = "none";
+          loginContentQrcode.style.display = "block";
+        };
+
+        var showPc = function(){
+          method.className = "login-method is-qrcode";
+          loginContentPc.style.display = "block";
+          loginContentQrcode.style.display = "none";
+        };
+
+
+        changeLoginMethod.onclick = function(eve){
+          var methodClass = method.className;
+          if(/is-qrcode/g.test(methodClass)){
+            showQrcode();
+          }else{
+            showPc();
+          }
+        };
+
+      })();
+    </script>
+</body>
+</html>
